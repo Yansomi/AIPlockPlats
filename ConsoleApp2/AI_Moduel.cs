@@ -20,6 +20,7 @@ namespace ConsoleApp2
         {
             this.modelPath = modelPath;
             this.session = new InferenceSession(this.modelPath);
+            this.awnsers = LoadAreas();
         }
         public string Predict(float input1, float input2,float input3,float input4, float input5 , float input6 , float input7 , float input8, float input9)
         {
@@ -66,72 +67,8 @@ namespace ConsoleApp2
 
             int awnser = ArgMax(data);
             string stringAwnser = "not found";
-            if (awnser == 0)
-            {
-                stringAwnser = "?";
-            }
-            else if (awnser == 1)
-            {
-                stringAwnser = "B31_B53";
-            }
-            else if (awnser == 2)
-            {
-                stringAwnser = "Buffert";
-            }
-            else if (awnser == 3)
-            {
-                stringAwnser = "D01-D30";
-            }
-            else if (awnser == 4)
-            {
-                stringAwnser = "D31-D54";
-            }
-            else if (awnser == 5)
-            {
-                stringAwnser = "E05-E28";
-            }
-            else if (awnser == 6)
-            {
-                stringAwnser = "E29-E58";
-            }
-            else if (awnser == 7)
-            {
-                stringAwnser = "F42-F67";
-            }
-            else if (awnser == 8)
-            {
-                stringAwnser = "GA01-GA27";
-            }
-            else if (awnser == 9)
-            {
-                stringAwnser = "GC-Jämn";
-            }
-            else if (awnser == 10)
-            {
-                stringAwnser = "GC-Ojämn";
-            }
-            else if (awnser == 11)
-            {
-                stringAwnser = "H21-H43";
-            }
-            else if (awnser == 12)
-            {
-                stringAwnser = "J01-J40";
-            }
-            else if (awnser == 13)
-            {
-                stringAwnser = "K-Gång";
-            }
-            else if (awnser == 14)
-            {
-                stringAwnser = "L21";
-            }
-            else if (awnser == 15)
-            {
-                stringAwnser = "L23-L70";
-            }
 
-            return stringAwnser;
+            return this.awnsers[awnser];
         }
         private float ScaleData(float input, float scaleMax, float scaleMin)
         {
@@ -150,6 +87,13 @@ namespace ConsoleApp2
                 }
             }
             return max;
+        }
+        private string[] LoadAreas()
+        {
+            string[] arr = { "A01 - A20", "B31_B53", "Buffert", "D01-D30", "D31-D54" , "E05-E28" , "E29-E58" , "F42-F67" ,
+            "GA01-GA27","GC-Jämn","GC-Ojämn","H21-H43","J01-J40","K-Gång","L21","L23-L70"};
+
+            return arr;
         }
     }
 }

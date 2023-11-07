@@ -5,21 +5,13 @@ namespace ConsoleApp2
 {
     internal class Program
     {
-        static void Main(string[] args)
+        static void Main()
         {
-            Dictionary<int,string> Artiklar = new Dictionary<int,string>();
-
-            var Parms = File.ReadAllText("C:\\Users\\Hampus\\source\\repos\\AIPlockPlats\\ConsoleApp2\\convert.txt");
-            Dictionary<int, string> derp = JsonSerializer.Deserialize<Dictionary<int,string>>(Parms);
-            string[] artikel = new string[derp.Count];
-            //string ok = derp.TryGetValue(3, out string value) ? value : string.Empty;
-            for(int i = 0; i < derp.Count; i++)
-            {
-                artikel[i] = derp.TryGetValue(i,out string value) ? value : string.Empty;
-            }
-            
+            ArtikelIndex artikelIndex = new ArtikelIndex();
+            int index = artikelIndex.GetArtikelIndex("Äpple röd 60+ PL");
+            Console.WriteLine(index);
             AnnModel ann = new AnnModel();
-            string awnser = ann.Predict(111371, 160, 1, 6.43f, 56, 13,5,0,0);
+            string awnser = ann.Predict(100256, index, 3, 13.75f, 48, 102, 3, 0,0);
             Console.WriteLine(awnser);
         }
     }
